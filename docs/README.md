@@ -19,10 +19,10 @@ Sois attentif à ce que fait **Tac** et aide-le si besoin.
 
 Vous allez avoir besoin d'un projet Symfony, tu vas donc en créer un !
 
-1.  Sur ton compte Github, crée un nouveau dépôt vide (sans fichier README.md) qui vous servira pour cet atelier
-2.  Clone ce dépôt grâce au lien donné ci-dessus ⬆ <a href="#input-clone"><i class="bi bi-code-slash"></i>&nbsp;Code</a>.
-3.  Change l'Url du dépôt par celui que tu viens de créer en utilisant `git remote set-url origin [l'adresse de ton nouveau dépôt]`
-4.  Envoie le projet sur ton dépôt et donne le lien à Tic
+1. Crée un nouveau dépôt sur ton compte GitHub à partir  
+de <a href="{{ site.github.repository_url }}" target="_blank">celui-ci <i class="bi bi-box-arrow-up-right"></i></a> en cliquant sur le bouton `Use this template` en haut à droite. Tu peux le nommer `workshop-doctrine-migrations` par exemple.
+2.  Clone ensuite sur ta machine le dépôt nouvellement créé 
+3.  Donne le lien de ton dépôt à Tic
 
 ## Tic
 Clone le projet en local sur ta machine grâce au lien fourni par Tac.
@@ -35,7 +35,6 @@ Sois attentif à ce que fait **Tac** et aide-le si besoin.
 Maintenant que vous avez tous les deux le projet, exécutez les commandes suivantes dans le terminal :
 ```bash
 composer install
-yarn install
 ```
 Puis configurez votre fichier `.env.local` en renseignant vos identifiants mySQL et le nom de votre base de données afin d'initier la connexion.  
 Créez ensuite votre base de données en exécutant la commande suivante dans le terminal 
@@ -110,17 +109,28 @@ Les étapes à respecter sont donc les suivantes :
   
 
 Création d'une entité
-1.  ```php
+1.  Création de l'entité (fichiers Entity + Repository)
+```php
 symfony console make:entity
 //symfony console m:e
 ```
-2.  ```php
+2. Génération du fichier de migration : ajout d'un fichier dans le dossier `migrations`
+```php
 symfony console make:migration
 //symfony console m:mig
 ```
+3. Mise à jour de la structure de la BDD
+```php
+symfony console doctrine:migrations:migrate
+//symfony console d:m:m
+```
 
+**Diagramme de séquences des commandes Doctrine**  
+à exécuter lors de la création ou de la mise à jour d'une entité :
+![Diagramme de séquence des commandes Doctrine](images/diagram-doctrine-commands.png)
+{: .text-center }
   
-Synchroniser la structure d'une base de données :
+**Synchroniser la structure d'une base de données après un pull** :
 
 1.  Destruction de la BDD 
 ```php
@@ -137,6 +147,8 @@ symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
 //symfony console d:m:m
 ```
+
+
 
 Parfait, vous avez tous les deux une entité Squirrel, mais ce n'est pas pour autant que vous avez des écureuils dans votre base de données ! Et pas de panique, vous avez supprimé votre base de données mais vous allez maintenant y insérer des données grâce aux fixtures !
 

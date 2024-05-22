@@ -16,6 +16,6 @@ title: 'Atelier Symfony Doctrine'
 description: 'Comprendre les enjeux des migrations gérées avec Doctrine'
 # type: ''
 main_image: 'images/cover-migration-des-oiseaux.jpg' # http or relative path to image
-show_clone: true
+show_clone: false
 show_toc: false
 lang: fr
